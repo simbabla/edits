@@ -9,8 +9,9 @@ export type ManagerLookupResult<T> = {
 };
 
 /**
- * Calls `getManager()`, then runs `run()` with the result, and always calls `close()` in a finally block.
+ * Calls `getManager()`, then runs `run()` with the result.
  * If the manager is not found, calls `onMissing()` and returns early without running or closing.
+ * Otherwise, always calls `close()` in a `finally` block, even if `run()` throws.
  */
 export async function withManager<T>(params: {
   getManager: () => Promise<ManagerLookupResult<T>>;
